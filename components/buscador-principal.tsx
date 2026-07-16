@@ -51,7 +51,7 @@ export function BuscadorPrincipal({
   return (
     <form
       onSubmit={onSubmit}
-      className="rounded-xl border border-border bg-card p-4 shadow-sm sm:p-5"
+      className="rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm sm:p-5"
     >
       <div className="flex flex-col gap-3 sm:flex-row">
         <div className="relative flex-1">
@@ -65,7 +65,7 @@ export function BuscadorPrincipal({
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Buscar por palabra clave, título o número de periódico…"
-            className="h-11 pl-9"
+            className="h-11 bg-background pl-9 text-foreground caret-primary placeholder:text-muted-foreground"
             aria-label="Palabra clave"
           />
         </div>
