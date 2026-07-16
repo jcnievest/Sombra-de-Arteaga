@@ -18,6 +18,10 @@ const nav = [
   { href: "/contacto", label: "Contacto" },
 ]
 
+const desktopNav = nav.filter((item) =>
+  ["/", "/consultar", "/leyes", "/solicitar", "/verificar"].includes(item.href),
+)
+
 export function PublicHeader() {
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
@@ -80,10 +84,48 @@ export function PublicHeader() {
           </Button>
         </div>
 
+        <div className="hidden items-center gap-2 lg:flex 2xl:hidden">
+          <nav aria-label="Navegación principal" className="flex items-center gap-1">
+            {desktopNav.map((item) => {
+              const active =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href)
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={cn(
+                    "rounded-md px-2 py-2 text-sm font-medium transition-colors",
+                    active
+                      ? "bg-secondary text-foreground"
+                      : "text-muted-foreground hover:bg-secondary hover:text-foreground",
+                  )}
+                >
+                  {item.label
+                    .replace(" publicaciones", "")
+                    .replace(" publicación", "")
+                    .replace(" documento", "")}
+                </Link>
+              )
+            })}
+          </nav>
+          <Button
+            render={<Link href="/interno" />}
+            variant="outline"
+            size="sm"
+            className="ml-1"
+          >
+            <Building2 className="h-4 w-4" />
+            Portal
+          </Button>
+        </div>
+
         <Button
           variant="ghost"
           size="icon"
-          className="2xl:hidden"
+          className="lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={open}
@@ -97,7 +139,7 @@ export function PublicHeader() {
         <nav
           id="menu-principal"
           aria-label="Navegación principal"
-          className="flex max-h-[calc(100vh-4rem)] flex-col gap-1 overflow-y-auto border-t border-border px-4 py-3 2xl:hidden"
+          className="flex max-h-[calc(100vh-4rem)] flex-col gap-1 overflow-y-auto border-t border-border px-4 py-3 lg:hidden"
         >
           {nav.map((item) => (
             <Link
