@@ -111,7 +111,7 @@ function formatoFechaLarga(iso: string): string {
  */
 export function descargarEdicionPdf(edicion: Edicion, firmado = true) {
   if (!firmado) {
-    descargarCopiaSimple(edicion)
+    generarCopiaSimple(edicion, false)
     return
   }
   const doc = new jsPDF({ unit: "mm", format: "a4" })
@@ -357,7 +357,16 @@ const ROJO: [number, number, number] = [150, 40, 40]
  * Copia SIMPLE de la edición, sin firma electrónica ni elementos de
  * verificación. Incluye marca de agua y aviso de que no tiene validez legal.
  */
-function descargarCopiaSimple(edicion: Edicion) {
+export function previsualizarCopiaSimplePdf(edicion: Edicion) {
+  const ventana = window.open("", "_blank")
+  generarCopiaSimple(edicion, true, ventana)
+}
+
+function generarCopiaSimple(
+  edicion: Edicion,
+  vistaPrevia: boolean,
+  ventanaPrevia: Window | null = null,
+) {
   const doc = new jsPDF({ unit: "mm", format: "a4" })
   const W = doc.internal.pageSize.getWidth()
   const H = doc.internal.pageSize.getHeight()
@@ -549,6 +558,17 @@ function descargarCopiaSimple(edicion: Edicion) {
 
   // Marca de agua en todas las páginas
   dibujarMarcaAgua(doc, "SIN VALIDEZ OFICIAL")
+
+  if (vistaPrevia) {
+    const url = URL.createObjectURL(doc.output("blob"))
+    if (ventanaPrevia) {
+      ventanaPrevia.location.href = url
+    } else {
+      window.open(url, "_blank", "noopener,noreferrer")
+    }
+    window.setTimeout(() => URL.revokeObjectURL(url), 60_000)
+    return
+  }
 
   doc.save(`Copia-simple-Periodico-No-${edicion.numero}-${edicion.fecha}.pdf`)
 }
