@@ -19,7 +19,7 @@ const pestanas = [
 export function ConsultarCliente() {
   const searchParams = useSearchParams()
   const qInicial = searchParams.get("q") ?? ""
-  const [tab, setTab] = useState(qInicial ? "busqueda" : "busqueda")
+  const [tab, setTab] = useState(qInicial ? "busqueda" : "calendario")
 
   return (
     <Tabs value={tab} onValueChange={(v) => setTab(v as string)} className="gap-6">
