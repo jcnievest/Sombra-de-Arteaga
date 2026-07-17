@@ -10,10 +10,10 @@ import { EdicionesPeriodico } from "@/components/consultar/ediciones-periodico"
 import { IndicePublicaciones } from "@/components/consultar/indice-publicaciones"
 
 const pestanas = [
-  { value: "busqueda", label: "Búsqueda avanzada", icon: Search },
   { value: "calendario", label: "Calendario de publicaciones", icon: CalendarDays },
   { value: "ediciones", label: "Ediciones del Periódico Oficial", icon: Newspaper },
   { value: "indice", label: "Índice de publicaciones", icon: ListOrdered },
+  { value: "busqueda", label: "Búsqueda avanzada", icon: Search },
 ]
 
 export function ConsultarCliente() {
