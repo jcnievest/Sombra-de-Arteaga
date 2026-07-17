@@ -1,12 +1,18 @@
 import Link from "next/link"
-import { FileText, Download, ShieldCheck, Building2, Calendar, Hash } from "lucide-react"
+import { FileText, ShieldCheck, Building2, Calendar } from "lucide-react"
 import type { DocumentoOficial } from "@/lib/data"
 import { formatFecha } from "@/lib/data"
+import { ediciones } from "@/lib/ediciones"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { BotonCopiaSimple } from "@/components/boton-copia-simple"
 
 export function DocumentoCard({ doc }: { doc: DocumentoOficial }) {
+  const edicion = ediciones.find(
+    (item) => item.fecha === doc.fechaPublicacion && item.tipo === "Ordinaria",
+  )
+
   return (
     <Card className="flex flex-col gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
       <CardContent className="flex flex-1 flex-col gap-3 p-5">
@@ -51,10 +57,13 @@ export function DocumentoCard({ doc }: { doc: DocumentoOficial }) {
           <FileText className="h-4 w-4" />
           Ver ficha
         </Button>
-        <Button size="sm" variant="outline" className="flex-1">
-          <Download className="h-4 w-4" />
-          PDF
-        </Button>
+        {edicion && (
+          <BotonCopiaSimple
+            edicion={edicion}
+            label="Copia simple"
+            className="flex-1"
+          />
+        )}
         <Button
           render={<Link href={`/verificar?folio=${doc.folio}`} />}
           size="sm"

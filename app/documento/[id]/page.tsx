@@ -2,7 +2,6 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import {
   ShieldCheck,
-  Download,
   ArrowLeft,
   Building2,
   Calendar,
@@ -14,12 +13,14 @@ import {
   Workflow,
 } from "lucide-react"
 import { getDocumento, formatFecha } from "@/lib/data"
+import { ediciones } from "@/lib/ediciones"
 import { PublicHeader, PublicFooter } from "@/components/public-header"
 import { QrSimulado } from "@/components/qr-simulado"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import { BotonCopiaSimple } from "@/components/boton-copia-simple"
 
 export default async function DocumentoPage({
   params,
@@ -29,6 +30,9 @@ export default async function DocumentoPage({
   const { id } = await params
   const doc = getDocumento(id)
   if (!doc) notFound()
+  const edicion = ediciones.find(
+    (item) => item.fecha === doc.fechaPublicacion && item.tipo === "Ordinaria",
+  )
 
   const cadenaFirmas = [
     {
@@ -176,10 +180,12 @@ export default async function DocumentoPage({
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  <Button>
-                    <Download className="h-4 w-4" />
-                    Descargar PDF firmado
-                  </Button>
+                  {edicion && (
+                    <BotonCopiaSimple
+                      edicion={edicion}
+                      variant="default"
+                    />
+                  )}
                   <Button
                     render={<Link href={`/verificar?folio=${doc.folio}`} />}
                     variant="outline"

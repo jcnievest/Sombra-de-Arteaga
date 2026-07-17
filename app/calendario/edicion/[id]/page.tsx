@@ -3,7 +3,6 @@ import Link from "next/link"
 import {
   ArrowLeft,
   ShieldCheck,
-  Download,
   Clock,
   Fingerprint,
   BadgeCheck,
@@ -15,6 +14,7 @@ import { formatFecha } from "@/lib/data"
 import { PublicHeader, PublicFooter } from "@/components/public-header"
 import { QrSimulado } from "@/components/qr-simulado"
 import { BotonDescargarEdicion } from "@/components/boton-descargar-edicion"
+import { BotonCopiaSimple } from "@/components/boton-copia-simple"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -189,9 +189,12 @@ export default async function EdicionPage({
                             <Eye className="h-4 w-4" />
                           </Button>
                         )}
-                        <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="Descargar">
-                          <Download className="h-4 w-4" />
-                        </Button>
+                        <BotonCopiaSimple
+                          edicion={edicion}
+                          iconOnly
+                          variant="ghost"
+                          className="h-8 w-8"
+                        />
                         <Button
                           render={<Link href="/verificar" aria-label="Validar" />}
                           variant="ghost"

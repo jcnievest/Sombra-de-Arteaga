@@ -2,13 +2,7 @@
 
 import { useMemo, useState } from "react"
 import Link from "next/link"
-import {
-  ListOrdered,
-  Eye,
-  Download,
-  ShieldCheck,
-  Search,
-} from "lucide-react"
+import { ListOrdered, Eye, ShieldCheck, Search } from "lucide-react"
 import {
   ediciones,
   aniosDisponibles,
@@ -22,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
+import { BotonCopiaSimple } from "@/components/boton-copia-simple"
 import {
   Select,
   SelectContent,
@@ -152,10 +147,11 @@ export function IndicePublicaciones() {
                 <Eye className="h-4 w-4" />
                 Ver edición
               </Button>
-              <Button size="sm">
-                <Download className="h-4 w-4" />
-                Descargar
-              </Button>
+              <BotonCopiaSimple
+                edicion={edicion}
+                variant="default"
+                label="Copia simple gratuita"
+              />
             </div>
           </div>
 
@@ -215,22 +211,25 @@ export function IndicePublicaciones() {
                             </Button>
                           ) : (
                             <Button
+                              render={
+                                <Link
+                                  href={`/calendario/edicion/${edicion.id}`}
+                                  aria-label="Ver documento en la edición"
+                                />
+                              }
                               variant="ghost"
                               size="icon"
                               className="h-8 w-8"
-                              aria-label="Ver documento"
                             >
                               <Eye className="h-4 w-4" />
                             </Button>
                           )}
-                          <Button
+                          <BotonCopiaSimple
+                            edicion={edicion}
+                            iconOnly
                             variant="ghost"
-                            size="icon"
                             className="h-8 w-8"
-                            aria-label="Descargar"
-                          >
-                            <Download className="h-4 w-4" />
-                          </Button>
+                          />
                           <Button
                             render={
                               <Link href="/verificar" aria-label="Validar" />
