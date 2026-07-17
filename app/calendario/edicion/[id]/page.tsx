@@ -7,7 +7,6 @@ import {
   Fingerprint,
   BadgeCheck,
   FileText,
-  Eye,
 } from "lucide-react"
 import { getEdicion, tipoEdicionColor } from "@/lib/ediciones"
 import { formatFecha } from "@/lib/data"
@@ -15,6 +14,7 @@ import { PublicHeader, PublicFooter } from "@/components/public-header"
 import { QrSimulado } from "@/components/qr-simulado"
 import { BotonDescargarEdicion } from "@/components/boton-descargar-edicion"
 import { BotonCopiaSimple } from "@/components/boton-copia-simple"
+import { BotonVistaPreviaSimple } from "@/components/boton-vista-previa-simple"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import {
@@ -175,20 +175,7 @@ export default async function EdicionPage({
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center justify-end gap-1">
-                        {d.docId ? (
-                          <Button
-                            render={<Link href={`/documento/${d.docId}`} aria-label="Ver documento" />}
-                            variant="ghost"
-                            size="icon"
-                            className="h-8 w-8"
-                          >
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        ) : (
-                          <Button variant="ghost" size="icon" className="h-8 w-8" aria-label="Ver documento">
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                        )}
+                        <BotonVistaPreviaSimple edicion={edicion} />
                         <BotonCopiaSimple
                           edicion={edicion}
                           iconOnly
