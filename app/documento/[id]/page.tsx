@@ -21,6 +21,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { BotonCopiaSimple } from "@/components/boton-copia-simple"
+import { BotonVistaPreviaSimple } from "@/components/boton-vista-previa-simple"
 
 export default async function DocumentoPage({
   params,
@@ -181,10 +182,13 @@ export default async function DocumentoPage({
 
                 <div className="flex flex-wrap gap-2">
                   {edicion && (
-                    <BotonCopiaSimple
-                      edicion={edicion}
-                      variant="default"
-                    />
+                    <>
+                      <BotonVistaPreviaSimple edicion={edicion} />
+                      <BotonCopiaSimple
+                        edicion={edicion}
+                        variant="default"
+                      />
+                    </>
                   )}
                   <Button
                     render={<Link href={`/verificar?folio=${doc.folio}`} />}

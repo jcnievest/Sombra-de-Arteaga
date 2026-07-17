@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
 import { BotonCopiaSimple } from "@/components/boton-copia-simple"
+import { BotonVistaPreviaSimple } from "@/components/boton-vista-previa-simple"
 import {
   Select,
   SelectContent,
@@ -195,35 +196,7 @@ export function IndicePublicaciones() {
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-end gap-1">
-                          {d.docId ? (
-                            <Button
-                              render={
-                                <Link
-                                  href={`/documento/${d.docId}`}
-                                  aria-label="Ver documento"
-                                />
-                              }
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8"
-                            >
-                              <Eye className="h-4 w-4" />
-                            </Button>
-                          ) : (
-                            <Button
-                              render={
-                                <Link
-                                  href={`/calendario/edicion/${edicion.id}`}
-                                  aria-label="Ver documento en la edición"
-                                />
-                              }
-                              variant="ghost"
-                              size="icon"
-                              className="h-8 w-8"
-                            >
-                              <Eye className="h-4 w-4" />
-                            </Button>
-                          )}
+                          <BotonVistaPreviaSimple edicion={edicion} />
                           <BotonCopiaSimple
                             edicion={edicion}
                             iconOnly

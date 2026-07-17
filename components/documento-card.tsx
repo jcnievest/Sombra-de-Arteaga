@@ -7,6 +7,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { BotonCopiaSimple } from "@/components/boton-copia-simple"
+import { BotonVistaPreviaSimple } from "@/components/boton-vista-previa-simple"
 
 export function DocumentoCard({ doc }: { doc: DocumentoOficial }) {
   const edicion = ediciones.find(
@@ -58,11 +59,14 @@ export function DocumentoCard({ doc }: { doc: DocumentoOficial }) {
           Ver ficha
         </Button>
         {edicion && (
-          <BotonCopiaSimple
-            edicion={edicion}
-            label="Copia simple"
-            className="flex-1"
-          />
+          <>
+            <BotonVistaPreviaSimple edicion={edicion} />
+            <BotonCopiaSimple
+              edicion={edicion}
+              label="Copia simple"
+              className="flex-1"
+            />
+          </>
         )}
         <Button
           render={<Link href={`/verificar?folio=${doc.folio}`} />}

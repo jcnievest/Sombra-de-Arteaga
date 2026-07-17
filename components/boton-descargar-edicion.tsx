@@ -4,6 +4,7 @@ import { useState } from "react"
 import { Download } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { PagoModal } from "@/components/pago-modal"
+import { BotonVistaPreviaSimple } from "@/components/boton-vista-previa-simple"
 import type { Edicion } from "@/lib/ediciones"
 
 interface Props {
@@ -27,6 +28,7 @@ export function BotonDescargarEdicion({
 
   return (
     <>
+      <BotonVistaPreviaSimple edicion={edicion} />
       <Button
         variant={variant}
         size={iconOnly ? "icon" : size}
